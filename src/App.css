@@ -1,0 +1,480 @@
+
+.siteLogo {
+  max-height: 70px;
+}
+
+.HeaderGrid{
+  display: grid;
+  grid-template-columns: 1fr auto auto 1fr;
+  grid-template-rows: auto min-content;
+  height: auto;
+  margin-top: 30px;
+}
+
+.pieceInfoGrid{
+  display: grid;
+  grid-template-columns: 1fr 70vw 1fr;
+}
+
+.pieceInfoImageGrid{
+  display: grid;
+  grid-template-columns: 1fr 70vw 1fr;
+  grid-template-rows: auto;
+}
+
+.galleryGrid{
+  display: grid;
+  grid-template-columns: 20vw auto 20vw;
+  grid-template-rows: 10vh auto 10vh;
+  height: 85vh;
+}
+
+.aboutMeGrid{
+  display: grid;
+  grid-template-columns: 15vw auto 1fr 15vw;
+  grid-template-rows: auto auto auto auto;
+  height: 85vh;
+  grid-gap: 10px;
+  margin-top: 20px;
+}
+
+.gallerySubGrid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+}
+
+#root{
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+.pieceFontSize{
+  font-size: 17px;
+}
+/* Grid location */
+
+/* This defines the location of an element within a grid */
+.grid-row-2{
+  grid-row: 1 / 2;
+}
+.grid-row-2{
+  grid-row: 2 / 3;
+}
+.test{
+  grid-column: 2 / 2;
+}
+.grid-row-1{
+  grid-row: 1 / 1;
+}
+.grid-col-2{
+  grid-column: 2 / 3;
+}
+.grid-col-3{
+  grid-column: 3 / 4;
+}
+.grid-row-2-2{
+  grid-row: 2 / 2;
+}
+/* Margins */
+.m-0{
+  margin: 0;
+}
+.grid-span-2{
+  grid-column: 1 / 3;
+}
+.logoContainer{
+  grid-column: 2/4;
+  align-self: end;
+}
+
+
+/* Grid Item Content Alignment */
+
+/*Center Content Horizontally (within Grid Column)*/
+.item-center-h{
+  justify-self: center;
+}
+/*Center Content Vertically (within Grid Column)*/
+.item-center-row {
+  align-self: center;
+}
+.item-end-h{
+  justify-self: end
+}
+.item-begin-h{
+  justify-self: baseline;
+}
+.item-center-v-h{
+  align-self: center;
+  justify-self: center;
+}
+
+.item-center-v{
+  align-self: center;
+}
+
+/*Content gets brought to bottom of row*/
+.item-bottom-row {
+ align-self: end;
+}
+
+.pt-60{
+  padding-top: 60px;
+}
+
+.pb-60{
+  padding-bottom: 60px;
+}
+
+.pb-90{
+  padding-bottom: 90px !important;
+}
+/*Center Content Horizontally & Vertically (within Grid Column)*/
+.item-center-v-h{
+  justify-self: center;
+  align-self: center;
+}
+/*Left Align Content Horizontally (within Grid Column)*/
+.item-left{
+  justify-self: baseline;
+}
+
+/* Border Radius (Rounded corners)*/
+.b-rad{
+  border-radius: 3px;
+}
+
+/* Image Size */
+.img-size{
+  width: 100%;
+  height: 100%;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.img-size:hover{
+  opacity: 0.75;
+}
+
+/* Opacity */
+.opacity-1{
+  opacity: 1 !important;
+}
+
+/* Animations */
+.animation{
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.imgAnim{
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 1;
+  cursor: pointer;
+}
+
+h2{
+  margin-top:0px;
+  font-family: 'Open Sans', sans-serif
+}
+
+.pl-30{
+  padding-left: 30px;
+}
+
+p{
+  font-size: 16px;
+}
+
+.aboutMeImgContainer{
+  justify-self: center;
+  align-self: start;
+  grid-row: 2 / 4;
+  grid-column: 2 / 3;
+}
+
+.aboutMeImg{
+  width: 100%;
+  height: 100%;
+  max-width: 30vw
+}
+
+p{
+  margin: 0;
+}
+
+/* Padding */
+.p-0{
+  padding: 0;
+}
+
+.pieceInfoClass{
+  max-width: 90vw;
+  width: 100%;
+  padding: 5px 0px 0px 5px;
+  justify-self: center;
+  align-self: center;
+}
+
+.OSans{
+    font-family: 'Open Sans', sans-serif
+  }
+
+.fWeight-600 {
+  font-weight: 600 !important;
+}
+
+#aboutMe {
+  color: #f9b600;
+  opacity: 0.75;
+}
+
+#work {
+  color: #9a29ff;
+  opacity: 0.75;
+}
+
+
+.navAnim{
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0.75;
+}
+
+.nav{
+align-self: baseline;
+text-decoration: none;
+}
+.nav:hover{
+cursor: pointer;
+opacity: 1;
+}
+
+
+/* TESTING */
+
+.galleryGridTest{
+display: grid;
+grid-template-columns: 1fr 70vw 1fr;
+grid-gap: 10px;
+}
+.wrapper{
+height: 100vh;
+}
+
+.socialWrapper{
+grid-row: 3 / 4;
+grid-column: 3 / 4;
+padding-left: 30px;
+align-self: baseline;
+}
+.aboutMeText{
+  grid-row: 2 / 3;
+  grid-column: 3 / 4;
+  padding-left: 30px;
+}
+svg{
+height: 100%;
+max-width: 40px;
+}
+
+/*//////Testing//////*/
+
+.mobileMenuWrapper{
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  height: 100vh;
+  width: 0;
+  overflow-x: hidden;
+  z-index: 9997;
+  position: fixed;
+  transition: width 0.5s ease-in-out;
+  /*background-color: #4a4a4a;*/
+  background-color: rgba(74, 74, 74, 0.85);
+  box-shadow: -5px 0px 20px 0px black;
+}
+.mobileMenuWrapper > div > a {
+  display: block;
+  transition: 0.3s;
+  padding: 10px 10px 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #f5f5f5;
+}
+
+.closed{
+  width: 0px !important;
+}
+
+.grid-col-4{
+  grid-column: 4/4;
+}
+
+.menuSiteLogo{
+  max-width: 50px;
+  margin: 10px 0px 10px 15px;
+}
+
+.mobileMenuBtn{
+  display: none;
+}
+
+@media only screen and (max-width: 768px){
+
+    .blur{
+      filter: blur(2px) !important;
+    }
+    .open{
+      width: 45vw !important;
+    }
+  .aboutMeGrid{
+    display: grid;
+    grid-template-columns: 5vw 1fr 5vw;
+    grid-template-rows: auto auto auto;
+    height: 85vh;
+    grid-gap: 10px;
+    margin-top: 20px;
+    filter: blur(0px);
+    transition: filter 0.5s linear;
+  }
+
+  .bEvents{
+    pointer-events: none;
+  }
+
+  .aboutMeImg{
+    width: 100%;
+    height: 100%;
+    max-width: 90vw;
+  }
+
+  .galleryGrid {
+    display: grid;
+    grid-template-columns: 10vw auto 10vw;
+    grid-template-rows: 5vh auto 5vh;
+    height: 85vh;
+    -webkit-transition: filter 0.4s linear;
+    -o-transition: filter 0.4s linear;
+    -moz-transition: filter 0.4s linear;
+    -ms-transition: filter 0.4s linear;
+    transition: filter 0.4s linear;
+    filter: blur(0px);
+}
+.aboutMeImgContainer {
+  justify-self: center;
+  -ms-flex-item-align: start;
+  align-self: start;
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+
+}
+.aboutMeText{
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  padding-left: 0px;
+}
+.socialWrapper{
+  grid-row: 3 / 4;
+  grid-column: 2 / 3;
+  padding-left: 0px;
+  align-self: baseline;
+  }
+  .pieceInfoImageGrid{
+    display: grid;
+    grid-template-columns: 1fr 90vw 1fr;
+    grid-template-rows: auto;
+  }
+  .pieceInfoGrid {
+    display: grid;
+    grid-template-columns: 1fr 90vw 1fr;
+  }
+
+  .img-size{
+    width: 100%;
+    height: 100%;
+    max-height: 100px;
+    object-fit: contain;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .HeaderGrid{
+    background-color: #f5f5f5;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: auto;
+    margin-top: 0px;
+    box-shadow: 0px 1px 1px #0000002b;
+    position: sticky;
+    top: 0;
+    z-index: 9996;
+    /*-webkit-backdrop-filter: blur(5px);*/
+    /*backdrop-filter: blur(5px);*/
+  }
+
+  .logoContainer{
+      grid-column: unset;
+      grid-row: 1 / 1;
+      align-self: center;
+      justify-self: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-right: -62px;
+  }
+  .mobileMenuBtn{
+    grid-row: 1 / 1;
+    grid-column: unset;
+    align-self: center;
+    justify-self: center;
+    margin-right: 15px;
+    margin-left: 15px;
+    height: 32px;
+    width: 32px;
+    display: unset;
+  }
+  .mobileDisplay{
+    display: none;
+  }
+  .siteLogo{
+    max-width: 50px;
+    transition: opacity ease-in 0.5s;
+    opacity: 1;
+  }
+  
+  .siteLogoTransition{
+    opacity: 0.1;
+  }
+
+  
+
+  .menuLogoContainer{
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+    align-self: center;
+}
+#pieceDetail{
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}
+  
+}
