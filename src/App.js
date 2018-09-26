@@ -82,8 +82,6 @@ export class App extends Component {
         }
 
     shouldComponentUpdate(/*nextProps, */ nextState) {
-            console.log(this.state.images);
-            console.log(nextState.images);
             return this.state.images !== nextState.images;
           }
 
