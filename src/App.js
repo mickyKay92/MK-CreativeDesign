@@ -71,48 +71,32 @@ export class App extends Component {
         super(props)
         this.state = {
             css: "closed",
-            css2: ""
+            css2: "",
+            css3: "",
+            func: null
         }      
     }
     mobileMenuCallback = () =>{
-        if(this.state.css === "closed"){
-            this.setState({
-                css: "open",
-                css2: "siteLogoTransition",
-            });
-            document.querySelector('.content').classList.add("blur", "bEvents");
-        }else{
-            this.setState({
-                css: "closed",
-                css2: "",
-            });
-                document.querySelector('.content').classList.remove("blur", "bEvents");
-            }
+            this.state.css === "closed" ? this.setState({css: "open",css2: "siteLogoTransition",css3: "bEvents", func: this.mobileMenuCallback}) : this.setState({css: "closed",css2: "", css3: "",func: null});
         }
-
-    altMenuCallback = () =>{
-        if (this.state.css === "closed"){
-            void(0);
-        }else{
-            this.mobileMenuCallback();
-        }
-    }
     render() {
       return (
         <Router>
-            <div className="wrapper" onClick={this.altMenuCallback}>
+            <div className="wrapper" onClick={this.state.func}>
                 <MobileMenu display={this.state.css}/>
-                <Header mobileMenuBtnCallback={this.mobileMenuCallback} logoDisplay={this.state.css2}/>
-    
-                <Route exact={true} path={"/"} render={(props) => 
-                    <Gallery {...props} images={imageSetTest}/>
-                }/>
-                <Route path={"/AboutMe"} render={data => (
-                    <AboutMe test={data}/>
-                )}/>
-                <Route path={"/detail/:pieceID"} render={({match}) =>(
-                    <PieceOverview set={imageSetTest.find(g => g.title === match.params.pieceID)}/>
-                )}/>
+                <div className={`${this.state.css3}`}>
+                    <Header mobileMenuBtnCallback={this.mobileMenuCallback} logoDisplay={this.state.css2}/>
+        
+                    <Route exact={true} path={"/"} render={(props) => 
+                        <Gallery {...props} images={imageSetTest}/>
+                    }/>
+                    <Route path={"/AboutMe"} render={data => (
+                        <AboutMe test={data}/>
+                    )}/>
+                    <Route path={"/detail/:pieceID"} render={({match}) =>(
+                        <PieceOverview set={imageSetTest.find(g => g.title === match.params.pieceID)}/>
+                    )}/>
+                </div>
             </div>
         </Router>
       );
@@ -158,10 +142,10 @@ const AboutMe = () => {
                 <p>In May of this year, I took the plunge into graphic design work for various clients around the world. I am confident with Adobe Photoshop, Illustrator, InDesign. As well as the Adobe Creative Suite, I use the digital illustration app ‘ProCreate’ on the iPad Pro. I'm also experienced with both the Windows and MacOS platforms.</p>
                 <br></br>
                 <p> As I enjoy learning new skills, in my spare time I have completed an online course on HTML and CSS using Codecademy. If you'd like to get in contact with me please don't hesitate, My contact details are below!</p>
-                </div>
-                <SocialMedia/>
             </div>
-        );
+            <SocialMedia/>
+        </div>
+    );
 }
 
 const PieceOverview = ({ set }) => {
