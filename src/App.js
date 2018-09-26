@@ -66,13 +66,15 @@ const Other = {image: [other1, other2, other3, other4, other5, other6, other7, o
 
 const imageSetTest = [Steam, PurpleDuck, Zion, RAF, RedRock, ITE, Other];
 function delay(callback, time) {setTimeout(callback, time);};
+
 export class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
             css: "closed",
-            css2: ""
-        }      
+            css2: "",
+            test: null
+        }   
     }
     mobileMenuCallback = () =>{
         if(this.state.css === "closed"){
@@ -97,12 +99,17 @@ export class App extends Component {
             this.mobileMenuCallback();
         }
     }
+    mobileCallback = () =>{
+        console.log('Hello');
+        this.state.test === null ? this.setState({ test:"mopen" }): this.setState({test: null});
+
+    };
     render() {
       return (
         <Router>
             <div className="wrapper" onClick={this.altMenuCallback}>
                 <MobileMenu display={this.state.css}/>
-                <Header mobileMenuBtnCallback={this.mobileMenuCallback} logoDisplay={this.state.css2}/>
+                <Header state={this.state.test} mobileCallback={this.mobileCallback} mobileMenuBtnCallback={this.mobileMenuCallback} logoDisplay={this.state.css2}/>
     
                 <Route exact={true} path={"/"} render={(props) => 
                     <Gallery {...props} images={imageSetTest}/>
@@ -119,7 +126,7 @@ export class App extends Component {
     }
 }
 
-const Header = ({logoDisplay, mobileMenuBtnCallback }) => {
+const Header = ({logoDisplay, mobileMenuBtnCallback, mobileCallback, state }) => {
     return(
         <div className="HeaderGrid animation" onLoad={delay(function(){document.querySelector('.HeaderGrid').classList.add('opacity-1');},200)}>
             <div className="logoContainer m-0 p-0 grid-row-1">
@@ -127,6 +134,17 @@ const Header = ({logoDisplay, mobileMenuBtnCallback }) => {
                     <img src={logoWhite} className={`siteLogo ${logoDisplay}`} alt="logo"/>
                 </Link>
             </div>
+
+            <div id={"nav-icon2"} onClick={mobileCallback} className={`${state}`}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+
             <img className="mobileMenuBtn" src={menu} onClick={mobileMenuBtnCallback} alt="Menu" ></img>
             <Link to={'/'} id="work" className="mobileDisplay nav fWeight-600 m-0 p-0 grid-col-2 grid-row-2 item-begin-h navAnim">Work</Link>
             <Link to={'/AboutMe'} id="aboutMe" className="mobileDisplay nav fWeight-600 m-0 p-0 grid-col-3 grid-row-2 item-end-h navAnim">About</Link>
@@ -224,8 +242,5 @@ const MobileMenu = ({display}) =>{
         </div>
     );
 }
-
-
-
 
 export default App;
