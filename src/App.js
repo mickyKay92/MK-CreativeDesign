@@ -64,12 +64,13 @@ const RedRock = {image: [redrock1, redrock2, redrock3, redrock4, redrock5, redro
 const ITE = {image: [ITE1, ITE2, ITE3, ITE4, ITE5, ITE6], title: "ITE", description: "This project had a few changes in ideas throughout. Initially, it started out as a clean modern twist on the initials of the program before developing into a crest before landing on the final seal design."};
 const Other = {image: [other1, other2, other3, other4, other5, other6, other7, other8, other9, other10], title: "Other", description: "Here are a few other examples of my artwork and early logo designs."};
 
-const imageSetTest = [Steam, PurpleDuck, Zion, RAF, RedRock, ITE, Other];
+const imageSet = [Steam, PurpleDuck, Zion, RAF, RedRock, ITE, Other];
 function delay(callback, time) {setTimeout(callback, time);};
 export class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            images: imageSet,
             css: "closed",
             css2: "",
             css3: "",
@@ -79,6 +80,13 @@ export class App extends Component {
     mobileMenuCallback = () =>{
             this.state.css === "closed" ? this.setState({css: "open",css2: "siteLogoTransition",css3: "bEvents", func: this.mobileMenuCallback}) : this.setState({css: "closed",css2: "", css3: "",func: null});
         }
+
+    shouldComponentUpdate(/*nextProps, */ nextState) {
+            console.log(this.state.images);
+            console.log(nextState.images);
+            return this.state.images !== nextState.images;
+          }
+
     render() {
       return (
         <Router>
@@ -88,13 +96,13 @@ export class App extends Component {
                     <Header mobileMenuBtnCallback={this.mobileMenuCallback} logoDisplay={this.state.css2}/>
         
                     <Route exact={true} path={"/"} render={(props) => 
-                        <Gallery {...props} images={imageSetTest}/>
+                        <Gallery {...props} images={this.state.images}/>
                     }/>
                     <Route path={"/AboutMe"} render={data => (
                         <AboutMe test={data}/>
                     )}/>
                     <Route path={"/detail/:pieceID"} render={({match}) =>(
-                        <PieceOverview set={imageSetTest.find(g => g.title === match.params.pieceID)}/>
+                        <PieceOverview set={imageSet.find(g => g.title === match.params.pieceID)}/>
                     )}/>
                 </div>
             </div>
@@ -122,8 +130,8 @@ const Gallery = ({images}) =>  {
     return (
         <div id="galleryGrid" onLoad={delay(function(){document.querySelector('#galleryGrid').classList.add('opacity-1');},200)} className="content galleryGrid animation item-center-v-h"> 
             <div id="gallery" className="gallerySubGrid grid-row-2 grid-col-2">
-                {images.map( gc => (<Link to={`/Detail/${gc.title}`}><div key={gc.image[0].toString()} className="item-center-v-h">
-                    <img className="b-rad img-size imgAnim" src={gc.image[0]} alt={gc.description}/></div></Link>))}
+                {images.map( gc => (<Link to={`/Detail/${gc.title}`} key={gc.image[0].toString()}><div key={gc.image[0].toString()} className="item-center-v-h">
+                    <img className="b-rad img-size imgAnim" src={gc.image[0]} alt={gc.description} key={gc.image[0].toString()}/></div></Link>))}
             </div> 
         </div>
     );
@@ -157,7 +165,7 @@ const PieceOverview = ({ set }) => {
                 </div>
             </div>
             <div className="pieceInfoImageGrid">
-                {set.image.map(gc => <img key={gc.toString()}src={gc} className={`pieceInfoClass grid-col-2 ${set.class}`} alt={gc.toString()}></img>)}
+                {set.image.map(gc => <img key={gc.toString()} src={gc} className={`pieceInfoClass grid-col-2 ${set.class}`} alt={gc.toString()}></img>)}
             </div>
         </div>
     );
@@ -198,11 +206,11 @@ const MobileMenu = ({display}) =>{
             </div>
             <div>
                 <Link to={"/"}>
-                    <a>Work</a>
+                    Work
                 </Link>
                 
                 <Link to={"/AboutMe"}>
-                    <a>About</a>
+                    About
                 </Link>
             </div>
         </div>
