@@ -65,6 +65,7 @@ const ITE = {image: [ITE1, ITE2, ITE3, ITE4, ITE5, ITE6], title: "ITE", descript
 const Other = {image: [other1, other2, other3, other4, other5, other6, other7, other8, other9, other10], title: "Other", description: "Here are a few other examples of my artwork and early logo designs."};
 
 const imageSet = [Steam, PurpleDuck, Zion, RAF, RedRock, ITE, Other];
+
 function delay(callback, time) {setTimeout(callback, time);};
 
 export class App extends PureComponent {
@@ -80,10 +81,6 @@ export class App extends PureComponent {
     mobileMenuCallback = () =>{
             this.state.css === "closed" ? this.setState({css: "open",css2: "siteLogoTransition",css3: "bEvents", func: this.mobileMenuCallback}) : this.setState({css: "closed",css2: "", css3: "",func: null});
         }
-    componentDidMount(){
-        console.log('App Mounted')
-    }
-
     render() {
       return (
         <Router>
@@ -107,9 +104,6 @@ export class App extends PureComponent {
 }
 
 class Header extends PureComponent {
-    componentDidMount(){
-        console.log('Header Mounted')
-    }
     render(){
         return(
             <div className="HeaderGrid animation" onLoad={delay(function(){document.querySelector('.HeaderGrid').classList.add('opacity-1');},200)}>
@@ -118,17 +112,6 @@ class Header extends PureComponent {
                         <img src={logoWhite} className={`siteLogo ${this.props.logoDisplay}`} alt="logo"/>
                     </Link>
                 </div>
-                {/*
-                <div id={"nav-icon2"} onClick={mobileCallback} className={`${state}`}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>*/}
-
-
                 <img className="mobileMenuBtn" src={menu} onClick={this.props.mobileMenuBtnCallback} alt="Menu" ></img>
                 <Link to={'/'} id="work" className="mobileDisplay nav fWeight-600 m-0 p-0 grid-col-2 grid-row-2 item-begin-h navAnim">Work</Link>
                 <Link to={'/AboutMe'} id="aboutMe" className="mobileDisplay nav fWeight-600 m-0 p-0 grid-col-3 grid-row-2 item-end-h navAnim">About</Link>
@@ -144,9 +127,6 @@ class Gallery extends PureComponent {
             images: imageSet,
         }
     }
-    componentDidMount(){
-        console.log('Gallery Mounted')
-    }
     render(){
         return (
             <div id="galleryGrid" onLoad={delay(function(){document.querySelector('#galleryGrid').classList.add('opacity-1');},200)} className="content galleryGrid animation item-center-v-h"> 
@@ -160,9 +140,6 @@ class Gallery extends PureComponent {
 };
 
 class AboutMe extends PureComponent {
-    componentDidMount(){
-        console.log('About Me Mounted')
-    }
     render(){
         return(
             <div id="aboutMeGrid" onLoad={delay(function(){document.querySelector('#aboutMeGrid').classList.add('opacity-1');},200)} className="content aboutMeGrid animation"> 
@@ -184,9 +161,6 @@ class AboutMe extends PureComponent {
 }
 
 class PieceOverview extends PureComponent{
-    componentDidMount(){
-        console.log('Piece Overview Mounted')
-    }
     render(){
         return (
             <div id="pieceDetail" className="content wrapper animation" onLoad={delay(function(){document.querySelector('#pieceDetail').classList.add('opacity-1');},200)}>
@@ -204,9 +178,6 @@ class PieceOverview extends PureComponent{
 };
 
 class SocialMedia extends PureComponent{
-    componentDidMount(){
-        console.log('Social Media Mounted')
-    }
     render(){
         return (
             <div className="content socialWrapper">
@@ -236,9 +207,6 @@ class SocialMedia extends PureComponent{
 }
 
 class MobileMenu extends PureComponent{
-    componentDidMount(){
-        console.log('Mobile Menu Mounted')
-    }
     render(){
         return(
             <div id="mobileMenu" className={`mobileMenuWrapper ${this.props.display}`}>
