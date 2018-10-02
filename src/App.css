@@ -40,7 +40,7 @@
 
 .gallerySubGrid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: auto;
   grid-gap: 10px;
   grid-row: 2 / 3;

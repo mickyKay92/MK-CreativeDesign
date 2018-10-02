@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Component} from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import './App.css';
@@ -120,26 +120,32 @@ class Header extends PureComponent {
     }
 }
 
-class Gallery extends PureComponent {
+class Gallery extends Component {
     constructor(props){
         super(props);
         this.state = {
             images: imageSet,
         }
     }
+    shouldComponentUpdate(){
+        return false;
+    }
     render(){
         return (
             <div id="galleryGrid" onLoad={delay(function(){document.querySelector('#galleryGrid').classList.add('opacity-1');},200)} className="content galleryGrid animation item-center-v-h"> 
                 <div id="gallery" className="gallerySubGrid grid-row-2 grid-col-2">
                     {this.state.images.map( gc => (<Link to={`/Detail/${gc.title}`} key={gc.image[0].toString()}><div key={gc.image[0].toString()} className="item-center-v-h">
-                        <img className="b-rad img-size imgAnim" src={gc.image[0]} alt={gc.description} key={gc.image[0].toString()}/></div></Link>))}
+                        <img className="b-rad img-size imgAnim" src={gc.image[0]} alt={gc.title} key={gc.image[0].toString()}/></div></Link>))}
                 </div> 
             </div>
         );
     }
 };
 
-class AboutMe extends PureComponent {
+class AboutMe extends Component {
+    shouldComponentUpdate(){
+        return false;
+    }
     render(){
         return(
             <div id="aboutMeGrid" onLoad={delay(function(){document.querySelector('#aboutMeGrid').classList.add('opacity-1');},200)} className="content aboutMeGrid animation"> 
@@ -177,7 +183,10 @@ class PieceOverview extends PureComponent{
     }
 };
 
-class SocialMedia extends PureComponent{
+class SocialMedia extends Component{
+    shouldComponentUpdate(){
+        return false;
+    }
     render(){
         return (
             <div className="content socialWrapper">
