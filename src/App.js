@@ -65,6 +65,26 @@ const ITE = {image: [ITE1, ITE2, ITE3, ITE4, ITE5, ITE6], title: "ITE", descript
 const Other = {image: [other1, other2, other3, other4, other5, other6, other7, other8, other9, other10], title: "Other", description: "Here are a few other examples of my artwork and early logo designs."};
 
 const imageSet = [Steam, PurpleDuck, Zion, RAF, RedRock, ITE, Other];
+const open = {
+    logo: {
+        opacity: "0.1"
+    },
+    menu: {
+        width: "45vw",
+        closed:{  width: "0px" }
+    },
+    wrapper: {
+        pointerEvents: "none"
+        
+    },
+    rotate: {
+        transform: 'rotate(90deg)',
+        transition: "all .4s",
+    },
+    overlay: {
+    background: "rgba(0,0,0,.5)",
+    },
+};
 
 function delay(callback, time) {setTimeout(callback, time);};
 
@@ -72,27 +92,20 @@ export class App extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            css: "closed",
-            css2: "",
-            css3: "",
-            func: null
+            menuOpen: false
         }      
     }
-    mobileMenuCallback = () =>{
-            this.state.css === "closed" ? this.setState({css: "open",css2: "siteLogoTransition",css3: "bEvents", func: this.mobileMenuCallback}) : this.setState({css: "closed",css2: "", css3: "",func: null});
-        }
     render() {
       return (
         <Router>
-            <div className="wrapper" onClick={this.state.func}>
-                <MobileMenu display={this.state.css}/>
-                <div className={`${this.state.css3}`}>
-                    <Header mobileMenuBtnCallback={this.mobileMenuCallback} logoDisplay={this.state.css2}/>
+            <div className="wrapper" onClick={() => {this.state.menuOpen ? this.setState({menuOpen: false}) : void(0);}}>
+            <div className="overlay" style={this.state.menuOpen ? open.overlay: null }></div>
+                <MobileMenu mVisible={this.state.menuOpen}/>
+                <div style={this.state.menuOpen ? open.wrapper : null}>
+                    <Header mVisible={this.state.menuOpen} mobileMenuBtnCallback={() => {this.setState({menuOpen: !this.state.menuOpen})}}/>
         
                     <Route exact={true} path={"/"} render={() => <Gallery/>}/>
-                    <Route path={"/AboutMe"} render={data => (
-                        <AboutMe test={data}/>
-                    )}/>
+                    <Route path={"/AboutMe"} render={() => <AboutMe/>}/>
                     <Route path={"/detail/:pieceID"} render={({match}) =>(
                         <PieceOverview set={imageSet.find(g => g.title === match.params.pieceID)}/>
                     )}/>
@@ -109,10 +122,10 @@ class Header extends PureComponent {
             <div className="HeaderGrid animation" onLoad={delay(function(){document.querySelector('.HeaderGrid').classList.add('opacity-1');},200)}>
                 <div className="logoContainer m-0 p-0 grid-row-1">
                     <Link to={"/"}>
-                        <img src={logoWhite} className={`siteLogo ${this.props.logoDisplay}`} alt="logo"/>
+                        <img src={logoWhite} className="siteLogo" alt="logo" style={this.props.mVisible ? open.logo : null}/>
                     </Link>
                 </div>
-                <img className="mobileMenuBtn" src={menu} onClick={this.props.mobileMenuBtnCallback} alt="Menu" ></img>
+                <img className="mobileMenuBtn" src={menu} onClick={this.props.mobileMenuBtnCallback} alt="Menu" style={this.props.mVisible ? open.rotate : null}/>
                 <Link to={'/'} id="work" className="mobileDisplay nav fWeight-600 m-0 p-0 grid-col-2 grid-row-2 item-begin-h navAnim">Work</Link>
                 <Link to={'/AboutMe'} id="aboutMe" className="mobileDisplay nav fWeight-600 m-0 p-0 grid-col-3 grid-row-2 item-end-h navAnim">About</Link>
             </div>
@@ -134,8 +147,8 @@ class Gallery extends Component {
         return (
             <div id="galleryGrid" onLoad={delay(function(){document.querySelector('#galleryGrid').classList.add('opacity-1');},200)} className="content galleryGrid animation item-center-v-h"> 
                 <div id="gallery" className="gallerySubGrid grid-row-2 grid-col-2">
-                    {this.state.images.map( gc => (<Link to={`/Detail/${gc.title}`} key={gc.image[0].toString()}><div key={gc.image[0].toString()} className="item-center-v-h">
-                        <img className="b-rad img-size imgAnim" src={gc.image[0]} alt={gc.title} key={gc.image[0].toString()}/></div></Link>))}
+                    {this.state.images.map((gc,index) => (<Link to={`/Detail/${gc.title}`} key={index}><div key={index} className="item-center-v-h">
+                        <img className="b-rad img-size imgAnim" src={gc.image[0]} alt={gc.title} key={index}/></div></Link>))}
                 </div> 
             </div>
         );
@@ -143,14 +156,14 @@ class Gallery extends Component {
 };
 
 class AboutMe extends Component {
-    shouldComponentUpdate(){
-        return false;
-    }
+shouldComponentUpdate(){
+    return false;
+}
     render(){
         return(
-            <div id="aboutMeGrid" onLoad={delay(function(){document.querySelector('#aboutMeGrid').classList.add('opacity-1');},200)} className="content aboutMeGrid animation"> 
+            <div id="aboutMeGrid" className="content aboutMeGrid animation" onLoad={delay(function(){document.querySelector('#aboutMeGrid').classList.add('opacity-1');},200)}> 
                 <div className="aboutMeImgContainer">
-                    <img src={meImage} className="b-rad aboutMeImg" alt="It's me!"/>
+                    <img src={meImage} className="b-rad-m aboutMeImg" alt="It's me!"/>
                 </div>
                 <div className="aboutMeText">
                     <h2>Hello!</h2>
@@ -166,7 +179,10 @@ class AboutMe extends Component {
     }
 }
 
-class PieceOverview extends PureComponent{
+class PieceOverview extends Component{
+    shouldComponentUpdate(){
+        return false;
+    }
     render(){
         return (
             <div id="pieceDetail" className="content wrapper animation" onLoad={delay(function(){document.querySelector('#pieceDetail').classList.add('opacity-1');},200)}>
@@ -176,7 +192,7 @@ class PieceOverview extends PureComponent{
                     </div>
                 </div>
                 <div className="pieceInfoImageGrid">
-                    {this.props.set.image.map(gc => <img key={gc.toString()} src={gc} className={`pieceInfoClass grid-col-2 ${this.props.set.class}`} alt={gc.toString()}></img>)}
+                    {this.props.set.image.map((gc, index) => <img key={index} src={gc} className={`pieceInfoClass grid-col-2 ${this.props.set.class}`} alt={index}></img>)}
                 </div>
             </div>
         );
@@ -218,7 +234,7 @@ class SocialMedia extends Component{
 class MobileMenu extends PureComponent{
     render(){
         return(
-            <div id="mobileMenu" className={`mobileMenuWrapper ${this.props.display}`}>
+            <div id="mobileMenu" className="mobileMenuWrapper" style={this.props.mVisible ? open.menu : open.menu.closed}>
                 <div className="menuLogoContainer">
                     <img src={logoWhite} className="menuSiteLogo" alt="logo"/>
                 </div>
