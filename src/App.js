@@ -70,8 +70,9 @@ const open = {
         opacity: "0.1"
     },
     menu: {
-        width: "45vw",
-        closed:{  width: "0px" }
+        transform: "translate(0px)",
+        boxShadow: "-5px 0px 20px 0px black",
+        closed:{  transform: "translate(-200px)", }
     },
     wrapper: {
         pointerEvents: "none"
